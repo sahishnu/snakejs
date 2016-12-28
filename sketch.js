@@ -7,17 +7,23 @@ function setup() {
 	snake = new Snake();
 	food = new Food();
 	frameRate(10);
+
 }
 
 
 function draw() {
   background(50);
+  textSize(15);
+  fill(35);
+  text("snekJS",width/2-15,height-2*scl);
   snake.update();
   snake.show();
+  snake.crash();
   food.show();
   if(snake.eat(food)){
   	food.pickLocation();
   }
+  snake.crash();
 }
 
 function keyPressed(){

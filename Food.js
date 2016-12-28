@@ -10,7 +10,8 @@ function Food(){
 
 	this.show = function(){
 		fill(175);
-		rect(this.x,this.y,scl,scl)
+		rect(this.x,this.y,scl,scl);
+		rotate(radians(frameCount));
 	}
 
 	

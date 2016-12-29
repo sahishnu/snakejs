@@ -1,11 +1,17 @@
 var snake;
 var scl = 20;
 var food;
+var joystick;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	snake = new Snake();
 	food = new Food();
+	joystick = new VirtualJoystick({
+		mouseSupport  : true,
+    	limitStickTravel: true,
+    	stickRadius : 50	
+	})
 	frameRate(10);
 
 }
@@ -16,6 +22,7 @@ function draw() {
   textSize(15);
   fill(35);
   snake.update();
+  animate();
   snake.show();
   snake.crash();
   food.show();
@@ -36,5 +43,23 @@ function keyPressed(){
 		snake.dir(1,0);
 	}
 }
+
+function animate(){
+	if( joystick.right() ){
+		snake.dir(1,0);
+	}
+	if( joystick.left() ){
+		snake.dir(-1,0);     
+	}
+	if( joystick.up() ){
+		snake.dir(0,-1);       
+	}
+	if( joystick.down() ){
+		snake.dir(0,1);
+	}
+}
+
+
+
 //imgay
 

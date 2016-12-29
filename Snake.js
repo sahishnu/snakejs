@@ -34,7 +34,7 @@ function Snake(){
 		noStroke();
 		//draws the snake
 		for(var i = 0; i < this.tail.length; i++){
-			fill(0,255-i*scl/2,0); //gradient effect for snake
+			fill(0,255-i*scl/3,0); //gradient effect for snake
 			rect(this.tail[i].x,this.tail[i].y,scl,scl);
 		}
 	}

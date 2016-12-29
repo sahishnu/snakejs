@@ -15,7 +15,6 @@ function draw() {
   background(50);
   textSize(15);
   fill(35);
-  text("snekJS",width/2-15,height-2*scl);
   snake.update();
   snake.show();
   snake.crash();

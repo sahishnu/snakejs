@@ -5,7 +5,7 @@ function Snake(){
 	this.x = 0;
 	this.y = 0;
 	this.xspeed = 0;
-	this.yspeed = 0; 
+	this.yspeed = 0;
 	this.total = 0; // number of food eaten so far (also like score)
 	this.tail = []; // the trailing squares behind the snake (like history)
 
@@ -14,7 +14,7 @@ function Snake(){
 
 		// update the snake location based on snake direction.
 		// constrain its location upto the screen width minus the size of the snake.
-		this.x = this.x + this.xspeed*scl; 
+		this.x = this.x + this.xspeed*scl;
 		this.y = this.y + this.yspeed*scl;
 		this.x = constrain(this.x,0,width-scl);
 		this.y = constrain(this.y,0,height-scl);
@@ -47,13 +47,14 @@ function Snake(){
 			var pos = this.tail[i];
 			var dis = dist(this.x,this.y,pos.x,pos.y);
 			if(dis < 1){
+				// Store new score
+				setNewHighScore(this.total);
 				this.total = 0;
 				this.tail = [];
 				this.x = 0;
 				this.y = 0;
 				this.xspeed = 0;
 				this.yspeed = 0;
-		
 			}
 		}
 	}
@@ -73,7 +74,7 @@ function Snake(){
 	this.dir = function(x,y){
 
 		if(x * -1 != this.xspeed){
-			this.xspeed = x;	
+			this.xspeed = x;
 		}
 		if(y * -1 != this.yspeed){
 			this.yspeed = y;
@@ -82,4 +83,21 @@ function Snake(){
 		//this.yspeed = y;
 	}
 }
-//imgay
+
+function setNewHighScore(score) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(xhttp.responseText);
+			var user = document.getElementsByClassName('user-name')[0];
+			var highscore = document.getElementsByClassName('user-score')[0];
+			if (data && data.length > 0 && data[0]) {
+				user.innerHTML = data[0].user;
+				highscore.innerHTML = data[0].score;
+			}
+		}
+	}
+	xhttp.open("POST", "http:localhost:3000/api/addHighScore", true);
+	xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+	xhttp.send(JSON.stringify({user: "TEST", score: score}));
+}

@@ -1,5 +1,5 @@
 var snake;
-var scl = 20;
+var scl = 40;
 var food;
 var joystick;
 
@@ -34,13 +34,22 @@ function draw() {
 
 function keyPressed(){
 	if(keyCode == UP_ARROW || keyCode == 87){
-		snake.dir(0,-1);
+		if(snake.xspeed != 0 && snake.yspeed != 1){
+			snake.dir(0,-1);
+		}
 	}else if(keyCode == DOWN_ARROW || keyCode == 83){
-		snake.dir(0,1);
+		if(snake.xspeed != 0 && snake.yspeed != -1){
+			snake.dir(0,1);
+		}
 	}else if(keyCode == LEFT_ARROW || keyCode == 65){
-		snake.dir(-1,0);
+		if(snake.xspeed != 1 && snake.yspeed != 0){
+			snake.dir(-1,0);
+		}
 	}else if(keyCode == RIGHT_ARROW || keyCode == 68){
-		snake.dir(1,0);
+		if(snake.xspeed != -1 && snake.yspeed != 0){
+			snake.dir(1,0);		
+		}
+
 	}
 }
 

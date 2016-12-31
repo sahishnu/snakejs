@@ -4,7 +4,7 @@
 function Snake(){
 	this.x = 0;
 	this.y = 0;
-	this.xspeed = 0;
+	this.xspeed = 1;
 	this.yspeed = 0; 
 	this.total = 0; // number of food eaten so far (also like score)
 	this.tail = []; // the trailing squares behind the snake (like history)
@@ -34,7 +34,7 @@ function Snake(){
 		noStroke();
 		//draws the snake
 		for(var i = 0; i < this.tail.length; i++){
-			fill(0,255-i*scl/3,0); //gradient effect for snake
+			fill(0,0+i*scl/3,0); //gradient effect for snake
 			rect(this.tail[i].x,this.tail[i].y,scl,scl);
 		}
 	}

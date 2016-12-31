@@ -25,6 +25,7 @@ function Snake(){
 		this.tail.splice(0,this.tail.length-this.total-1); // only keeps last (total) number of entries
 
 		// displays score in center of screen
+		textAlign(CENTER);
 		textSize(38);
 		fill(175);
 		text(this.total, width/2, height/2);
@@ -48,6 +49,10 @@ function Snake(){
 			if(dis < 1){
 				this.total = 0;
 				this.tail = [];
+				this.x = 0;
+				this.y = 0;
+				this.xspeed = 0;
+				this.yspeed = 0;
 		
 			}
 		}

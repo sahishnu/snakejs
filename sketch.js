@@ -25,9 +25,6 @@ function setup() {
 
 function draw() {
 	background(50);
-	textSize(30);
-	fill(0);
-	text(name, (width/2)-15, (height/2)-30);
 	snake.update();
 	animate();
 	snake.show();

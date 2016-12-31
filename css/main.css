@@ -76,6 +76,22 @@ a {
     width: 100%;
 }
 
+.user-name, .user-score {
+    cursor: default;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 5vw;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+}
+
+.user-score {
+    top: 3vh;
+    right: 6vw;
+}
+
 #section-footer {
     z-index: 4;
     position: fixed;
@@ -159,9 +175,9 @@ a {
 
 
 /* dat gui element */
-#gui { 
-    position: fixed; 
-    top: 82px; 
+#gui {
+    position: fixed;
+    top: 82px;
     right: 0px;
 }
 

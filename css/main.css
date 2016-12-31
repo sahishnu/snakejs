@@ -47,6 +47,12 @@ a {
     border-bottom: 1px dotted inherit;
 }
 
+input {
+    border: 1px solid;
+    font-size: 14px;
+    padding: 5px 5px;
+}
+
 /* All nav bars */
 .section-nav {
     list-style: none;
@@ -74,6 +80,56 @@ a {
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+@keyframes slideModalIn {
+    0% {
+        top: -10vh;
+    }
+
+    100% {
+        top: 30vh;
+    }
+}
+
+@keyframes slideModalOut {
+    0% {
+        top: 30vh;
+    }
+
+    100% {
+        top: -50vh;
+    }
+}
+
+.btn {
+    padding: 6px;
+    background-color: white;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.user-modal {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 25px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 40vh;
+    width: 75vh;
+}
+
+.user-modal-in {
+    animation: slideModalIn 1s ease-in forwards;
+}
+
+.user-modal-out {
+    animation: slideModalOut 1s ease-in forwards;
 }
 
 .user-name, .user-score {

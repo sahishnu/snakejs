@@ -6,8 +6,10 @@ function Snake(){
 	this.y = 0;
 	this.xspeed = 0;
 	this.yspeed = 0;
+	this.score = 0;
 	this.total = 0; // number of food eaten so far (also like score)
 	this.tail = []; // the trailing squares behind the snake (like history)
+	this.gameOver = false;
 
 	// This is called every frame to update the snake
 	this.update = function(){
@@ -47,14 +49,14 @@ function Snake(){
 			var pos = this.tail[i];
 			var dis = dist(this.x,this.y,pos.x,pos.y);
 			if(dis < 1){
-				// Store new score
-				setNewHighScore(this.total);
+				this.score = this.total;
 				this.total = 0;
 				this.tail = [];
 				this.x = 0;
 				this.y = 0;
 				this.xspeed = 0;
 				this.yspeed = 0;
+				this.gameOver = true;
 			}
 		}
 	}
@@ -82,22 +84,4 @@ function Snake(){
 		//this.xspeed = x;
 		//this.yspeed = y;
 	}
-}
-
-function setNewHighScore(score) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(xhttp.responseText);
-			var user = document.getElementsByClassName('user-name')[0];
-			var highscore = document.getElementsByClassName('user-score')[0];
-			if (data && data.length > 0 && data[0]) {
-				user.innerHTML = data[0].user;
-				highscore.innerHTML = data[0].score;
-			}
-		}
-	}
-	xhttp.open("POST", "http:localhost:3000/api/addHighScore", true);
-	xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-	xhttp.send(JSON.stringify({user: "TEST", score: score}));
 }

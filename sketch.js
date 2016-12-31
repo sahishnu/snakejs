@@ -26,7 +26,11 @@ function draw() {
 	if(snake.eat(food)){
 		food.pickLocation();
 	}
-	snake.crash();
+
+	if (snake.gameOver) {
+		setNewHighScore(snake.score);
+		snake.gameOver = false;
+	}
 }
 
 function keyPressed(){
@@ -58,6 +62,34 @@ function getHighestScore() {
 	xhttp.send();
 }
 
+function setNewHighScore(score) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = JSON.parse(xhttp.responseText);
+			var user = document.getElementsByClassName('user-name')[0];
+			var highscore = document.getElementsByClassName('user-score')[0];
+			if (data && data.length > 0 && data[0]) {
+				user.innerHTML = data[0].user;
+				highscore.innerHTML = data[0].score;
+			}
+		}
+	}
+	xhttp.open("POST", "http:localhost:3000/api/addHighScore", true);
+	xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+	xhttp.send(JSON.stringify({user: name, score: score}));
+	getHighestScore();
+}
+
+function setUserClose() {
+	var modal = document.getElementsByClassName('user-modal')[0];
+	modal.classList.remove('user-modal-in');
+	modal.classList.add('user-modal-out');
+	name = document.getElementById('username').value;
+}
+
 window.onload = function() {
+	var modal = document.getElementsByClassName('user-modal')[0];
+	modal.classList.add('user-modal-in');
 	getHighestScore();
 };

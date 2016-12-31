@@ -10,11 +10,28 @@
   <script language="javascript" type="text/javascript" src="Snake.js"></script>
   <script language="javascript" type="text/javascript" src="Food.js"></script>
   <script language="javascript" type="text/javascript" src="virtualjoystick.js"></script>
+  <script src="sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
   <style> body {padding: 0; margin: 0;} </style>
 </head>
 
 <body>
+  <script>
+    swal({
+        title: "An input!",
+        text: 'Write something interesting:',
+        type: 'input',
+        showCancelButton: false,
+        closeOnConfirm: true,
+        animation: "slide-from-top",
+        inputPlaceholder: "Name your snek"
+    }, function(inputValue){
+        name = inputValue;
+        console.log("You wrote", inputValue);
+    }); 
+
+  </script>
 
   <!-- FOOTER -->
     <div id="section-footer">

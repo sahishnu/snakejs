@@ -4,7 +4,7 @@
 function Snake(){
 	this.x = 0;
 	this.y = 0;
-	this.xspeed = 1;
+	this.xspeed = 0;
 	this.yspeed = 0; 
 	this.total = 0; // number of food eaten so far (also like score)
 	this.tail = []; // the trailing squares behind the snake (like history)
@@ -66,8 +66,15 @@ function Snake(){
 	}
 
 	this.dir = function(x,y){
-		this.xspeed = x;
-		this.yspeed = y;
+
+		if(x * -1 != this.xspeed){
+			this.xspeed = x;	
+		}
+		if(y * -1 != this.yspeed){
+			this.yspeed = y;
+		}
+		//this.xspeed = x;
+		//this.yspeed = y;
 	}
 }
 //imgay

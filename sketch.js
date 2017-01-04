@@ -4,12 +4,26 @@ var food;
 var joystick;
 var name;
 var level = 10;
-
+var database;
 
 
 function setup() {
-
 	createCanvas(windowWidth, windowHeight);
+
+	// Initialize Firebase
+	var config = {
+	apiKey: "AIzaSyDS6UXulI-e_xed3iQx1HWUk-6mF6CKw4A",
+	authDomain: "snekjs-932e0.firebaseapp.com",
+	databaseURL: "https://snekjs-932e0.firebaseio.com",
+	storageBucket: "snekjs-932e0.appspot.com",
+	messagingSenderId: "600064049611"
+	};
+	firebase.initializeApp(config);
+	database = firebase.database();
+
+	var ref = database.ref('scores');
+	ref.on('value', gotData, errData);
+
 	snake = new Snake();
 	food = new Food();
 	frameRate(level);
@@ -22,7 +36,7 @@ function draw() {
 	text(level, width/2, 0);
 	background(50);
 	snake.update();
-	//updateLevel(snake.total);
+	//nextLevel(snake.total);
 	snake.show();
 	snake.crash();
 	food.show();
@@ -33,7 +47,7 @@ function draw() {
 	}
 
 	if (snake.gameOver) {
-		//setNewHighScore(snake.score);
+		sendScore(snake.score);
 		level = 10;
 		snake.gameOver = false;
 	}
@@ -59,11 +73,49 @@ function setUserClose() {
 	name = document.getElementById('username').value;
 }
 
-function nextLevel(){
-	if(snake.total != 0 && snake.total%5 == 0){
+function nextLevel(total){
+	if(total != 0 && total%5 == 0){
 		level++;
 	}
 }
+
+function sendScore(score){
+	var data = {
+		name: name,
+		score: score
+	}
+	var ref = database.ref('scores');
+
+	ref.push(data);
+}
+
+
+function gotData(data){
+	var scores = data.val();
+	var keys = Object.keys(scores);
+	var highscore = scores[keys[0]].score;
+	var name;
+	for (var i = 0; i < keys.length; i++){
+		var k = keys[i];
+		var score = scores[k].score;
+		if(score > highscore){
+			highscore = score;
+			name = scores[k].name;
+		}
+	}
+	console.log(highscore, name);
+	var user = document.getElementsByClassName('user-name')[0];
+	var highestscore = document.getElementsByClassName('user-score')[0];
+	user.innerHTML = name;
+	highestscore.innerHTML = highscore;
+}
+
+function errData(err){
+	console.log('Error');
+	console.log(err);
+}
+
+
 
 /*
 function getHighestScore() {

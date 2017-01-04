@@ -4,7 +4,9 @@ var food;
 var joystick;
 var name;
 var level = 10;
+var count = 5;
 var database;
+var modelout = false;
 
 
 function setup() {
@@ -36,12 +38,22 @@ function draw() {
 	text(level, width/2, 0);
 	background(50);
 	snake.update();
-	//nextLevel(snake.total);
+
 	snake.show();
 	snake.crash();
 	food.show();
+
 	if(snake.eat(food)){
 		food.pickLocation();
+		var v = createVector(food.x,food.y);
+		for(var i = 0; i < snake.tail.length; i++){
+			var s = createVector(snake.tail[i].x,snake.tail[i].y);
+			var dis = dist(v.x,v.y,s.x,s.y);
+			if(dis < 1){
+				console.log("Oops");
+				food.pickLocation();
+			}
+		}
 		nextLevel();
 		frameRate(level);
 	}
@@ -49,33 +61,32 @@ function draw() {
 	if (snake.gameOver) {
 		sendScore(snake.score);
 		level = 10;
+		frameRate(level);
 		snake.gameOver = false;
 	}
 
 }
 
 function keyPressed(){
-	if(keyCode == UP_ARROW || keyCode == 87){
-			snake.dir(0,-1);
-	}else if(keyCode == DOWN_ARROW || keyCode == 83){
-			snake.dir(0,1);
-	}else if(keyCode == LEFT_ARROW || keyCode == 65){
-			snake.dir(-1,0);
-	}else if(keyCode == RIGHT_ARROW || keyCode == 68){
-			snake.dir(1,0);
+	if(modelout){
+		if(keyCode == UP_ARROW || keyCode == 87){
+				snake.dir(0,-1);
+		}else if(keyCode == DOWN_ARROW || keyCode == 83){
+				snake.dir(0,1);
+		}else if(keyCode == LEFT_ARROW || keyCode == 65){
+				snake.dir(-1,0);
+		}else if(keyCode == RIGHT_ARROW || keyCode == 68){
+				snake.dir(1,0);
+		}
 	}
 }
 
-function setUserClose() {
-	var modal = document.getElementsByClassName('user-modal')[0];
-	modal.classList.remove('user-modal-in');
-	modal.classList.add('user-modal-out');
-	name = document.getElementById('username').value;
-}
-
-function nextLevel(total){
-	if(total != 0 && total%5 == 0){
-		level++;
+function nextLevel(){
+	if(count == 0){
+		frameRate(level++);
+		count = 5;
+	}else{
+		count--;
 	}
 }
 
@@ -85,7 +96,6 @@ function sendScore(score){
 		score: score
 	}
 	var ref = database.ref('scores');
-
 	ref.push(data);
 }
 
@@ -103,7 +113,7 @@ function gotData(data){
 			name = scores[k].name;
 		}
 	}
-	console.log(highscore, name);
+	//console.log(highscore, name);
 	var user = document.getElementsByClassName('user-name')[0];
 	var highestscore = document.getElementsByClassName('user-score')[0];
 	user.innerHTML = name;
@@ -113,6 +123,15 @@ function gotData(data){
 function errData(err){
 	console.log('Error');
 	console.log(err);
+}
+
+function setUserClose() {
+
+	var modal = document.getElementsByClassName('user-modal')[0];
+	modal.classList.remove('user-modal-in');
+	modal.classList.add('user-modal-out');
+	name = document.getElementById('username').value;
+	modelout = true;
 }
 
 

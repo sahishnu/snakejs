@@ -37,7 +37,7 @@ function Snake(){
 		noStroke();
 		//draws the snake
 		for(var i = 0; i < this.tail.length; i++){
-			fill(0,0+i*scl/3,0); //gradient effect for snake
+			fill(0,0+i*2,0); //gradient effect for snake
 			rect(this.tail[i].x,this.tail[i].y,scl,scl);
 		}
 	}
@@ -73,12 +73,23 @@ function Snake(){
 		}
 	}
 
+	// set the direction of the snake
 	this.dir = function(x,y){
+
+		if(this.total == 0){
+			this.xspeed = x;
+			this.yspeed = y;
+		}
+
 		if(x * -1 != this.xspeed){
 			this.xspeed = x;
+		}else{
+			this.xspeed = this.xspeed;
 		}
 		if(y * -1 != this.yspeed){
 			this.yspeed = y;
+		}else{
+			this.yspeed = this.yspeed;
 		}
 	}
 }

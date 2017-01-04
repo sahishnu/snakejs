@@ -84,7 +84,7 @@ input {
 
 @keyframes slideModalIn {
     0% {
-        top: -10vh;
+        top: -50vh;
     }
 
     100% {

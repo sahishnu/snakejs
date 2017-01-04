@@ -74,14 +74,11 @@ function Snake(){
 	}
 
 	this.dir = function(x,y){
-
 		if(x * -1 != this.xspeed){
 			this.xspeed = x;
 		}
 		if(y * -1 != this.yspeed){
 			this.yspeed = y;
 		}
-		//this.xspeed = x;
-		//this.yspeed = y;
 	}
 }

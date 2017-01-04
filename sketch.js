@@ -3,34 +3,41 @@ var scl = 40;
 var food;
 var joystick;
 var name;
+var level = 10;
 
 
 
 function setup() {
 
 	createCanvas(windowWidth, windowHeight);
-
 	snake = new Snake();
 	food = new Food();
-	frameRate(10);
-
+	frameRate(level);
 }
 
 
 function draw() {
+	textSize(38);
+	fill(175);
+	text(level, width/2, 0);
 	background(50);
 	snake.update();
+	//updateLevel(snake.total);
 	snake.show();
 	snake.crash();
 	food.show();
 	if(snake.eat(food)){
 		food.pickLocation();
+		nextLevel();
+		frameRate(level);
 	}
 
 	if (snake.gameOver) {
-		setNewHighScore(snake.score);
+		//setNewHighScore(snake.score);
+		level = 10;
 		snake.gameOver = false;
 	}
+
 }
 
 function keyPressed(){
@@ -45,6 +52,20 @@ function keyPressed(){
 	}
 }
 
+function setUserClose() {
+	var modal = document.getElementsByClassName('user-modal')[0];
+	modal.classList.remove('user-modal-in');
+	modal.classList.add('user-modal-out');
+	name = document.getElementById('username').value;
+}
+
+function nextLevel(){
+	if(snake.total != 0 && snake.total%5 == 0){
+		level++;
+	}
+}
+
+/*
 function getHighestScore() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -81,15 +102,11 @@ function setNewHighScore(score) {
 	getHighestScore();
 }
 
-function setUserClose() {
-	var modal = document.getElementsByClassName('user-modal')[0];
-	modal.classList.remove('user-modal-in');
-	modal.classList.add('user-modal-out');
-	name = document.getElementById('username').value;
-}
+
 
 window.onload = function() {
 	var modal = document.getElementsByClassName('user-modal')[0];
 	modal.classList.add('user-modal-in');
 	getHighestScore();
 };
+*/

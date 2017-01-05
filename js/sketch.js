@@ -8,10 +8,14 @@ var count = 5;
 var database;
 var modelout = false;
 var mutex = false;
+var hpadding;
+var vpadding;
 
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	hpadding = windowWidth - windowWidth%scl;
+	vpadding = windowHeight - windowHeight%scl;
+	createCanvas(hpadding, vpadding);
 
 	// Initialize Firebase
 	var config = {

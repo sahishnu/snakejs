@@ -132,8 +132,10 @@ function gotData(data){
 	//console.log(highscore, name);
 	var user = document.getElementsByClassName('user-name')[0];
 	var highestscore = document.getElementsByClassName('user-score')[0];
+	var snakeskilled = document.getElementsByClassName('snakes-killed-number')[0];
 	user.innerHTML = name;
 	highestscore.innerHTML = highscore;
+	snakeskilled.innerHTML = keys.length;
 }
 
 function errData(err){

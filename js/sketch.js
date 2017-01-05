@@ -57,6 +57,7 @@ function draw() {
 	snake.crash();
 	food.show();
 
+	mutex = false;
 	if(snake.eat(food)){
 		food.pickLocation();
 		var v = createVector(food.x,food.y);
@@ -78,8 +79,6 @@ function draw() {
 		frameRate(level);
 		snake.gameOver = false;
 	}
-
-	mutex = false;
 
 }
 

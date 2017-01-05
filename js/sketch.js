@@ -15,11 +15,11 @@ function setup() {
 
 	// Initialize Firebase
 	var config = {
-	apiKey: "AIzaSyDS6UXulI-e_xed3iQx1HWUk-6mF6CKw4A",
-	authDomain: "snekjs-932e0.firebaseapp.com",
-	databaseURL: "https://snekjs-932e0.firebaseio.com",
-	storageBucket: "snekjs-932e0.appspot.com",
-	messagingSenderId: "600064049611"
+		apiKey: "AIzaSyDS6UXulI-e_xed3iQx1HWUk-6mF6CKw4A",
+		authDomain: "snekjs-932e0.firebaseapp.com",
+		databaseURL: "https://snekjs-932e0.firebaseio.com",
+		storageBucket: "snekjs-932e0.appspot.com",
+		messagingSenderId: "600064049611"
 	};
 	firebase.initializeApp(config);
 	database = firebase.database();
@@ -47,12 +47,8 @@ function setup() {
 
 
 function draw() {
-	textSize(38);
-	fill(175);
-	text(level, width/2, 0);
 	background(50);
 	snake.update();
-	
 	snake.show();
 	snake.crash();
 	food.show();
@@ -79,10 +75,13 @@ function draw() {
 		snake.gameOver = false;
 	}
 
+	mutex = false;
+
 }
 
 function keyPressed(){
-	if(modelout){
+	if(modelout && !mutex){
+		mutex = true;
 		if(keyCode == UP_ARROW || keyCode == 87){
 				snake.dir(0,-1);
 		}else if(keyCode == DOWN_ARROW || keyCode == 83){
@@ -143,6 +142,7 @@ function errData(err){
 
 
 
+
 /*
 function getHighestScore() {
 	var xhttp = new XMLHttpRequest();
@@ -180,11 +180,4 @@ function setNewHighScore(score) {
 	getHighestScore();
 }
 
-
-
-window.onload = function() {
-	var modal = document.getElementsByClassName('user-modal')[0];
-	modal.classList.add('user-modal-in');
-	getHighestScore();
-};
 */

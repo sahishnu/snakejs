@@ -94,8 +94,6 @@ function keyPressed(){
 				snake.dir(-1,0);
 		}else if(keyCode == RIGHT_ARROW || keyCode == 68){
 				snake.dir(1,0);
-		}else if(keyCode == 32){
-			food.pickLocation();
 		}
 	}
 }

@@ -67,7 +67,7 @@ function Snake(){
 		for(var i = 0; i < this.tail.length-1; i++){
 			var pos = this.tail[i];
 			var dis = dist(this.x,this.y,pos.x,pos.y);
-			if(dis < 1){
+			if(dis < 3){
 				this.score = this.total;
 				this.total = 0;
 				this.tail = [];

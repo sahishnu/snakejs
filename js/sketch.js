@@ -64,7 +64,7 @@ function draw() {
 		for(var i = 0; i < snake.tail.length; i++){
 			var s = createVector(snake.tail[i].x,snake.tail[i].y);
 			var dis = dist(v.x,v.y,s.x,s.y);
-			if(dis < 1){
+			if(dis < 3){
 				console.log("Oops");
 				food.pickLocation();
 			}

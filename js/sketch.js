@@ -24,6 +24,19 @@ function setup() {
 	firebase.initializeApp(config);
 	database = firebase.database();
 
+	vex.dialog.prompt({
+	    message: 'Enter your name:',
+	    callback: function (value) {
+	        if (value) {
+				name = value;
+	            console.log('Successful');
+	            modelout = true;
+	        } else {
+	            console.log('Error.');
+	        }
+	    }
+	})
+
 	var ref = database.ref('scores');
 	ref.on('value', gotData, errData);
 
@@ -124,15 +137,6 @@ function gotData(data){
 function errData(err){
 	console.log('Error');
 	console.log(err);
-}
-
-function setUserClose() {
-
-	var modal = document.getElementsByClassName('user-modal')[0];
-	modal.classList.remove('user-modal-in');
-	modal.classList.add('user-modal-out');
-	name = document.getElementById('username').value;
-	modelout = true;
 }
 
 

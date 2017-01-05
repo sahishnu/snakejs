@@ -10,6 +10,25 @@ function Snake(){
 	this.total = 0; // number of food eaten so far (also like score)
 	this.tail = []; // the trailing squares behind the snake (like history)
 	this.gameOver = false;
+	this.color = Math.floor(Math.random() * 3) + 1
+	this.r = 0;
+	this.g = 0;
+	this.b = 0;
+
+	switch(this.color){
+		case 1:
+			this.r = 1;
+			break;
+		case 2:
+			this.g = 1;
+			break;
+		case 3:
+			this.b = 1;
+			break;
+		default:
+			this.g = 1;
+
+	} 
 
 	// This is called every frame to update the snake
 	this.update = function(){
@@ -37,7 +56,7 @@ function Snake(){
 		noStroke();
 		//draws the snake
 		for(var i = 0; i < this.tail.length; i++){
-			fill(0,0+i*2,0); //gradient effect for snake
+			fill(this.r*i*2,this.g*i*2,this.b*i*2); //gradient effect for snake
 			rect(this.tail[i].x,this.tail[i].y,scl,scl);
 		}
 	}

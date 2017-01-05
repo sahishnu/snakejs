@@ -144,7 +144,7 @@ function errData(err){
 
 
 
-/*
+
 function getHighestScore() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -158,7 +158,7 @@ function getHighestScore() {
 			}
 		}
 	}
-	xhttp.open("GET", "http:localhost:3000/api/getHighestScore", true);
+	xhttp.open("GET", "http:sbodiwala:3000/api/getHighestScore", true);
 	xhttp.send();
 }
 
@@ -175,10 +175,9 @@ function setNewHighScore(score) {
 			}
 		}
 	}
-	xhttp.open("POST", "http:localhost:3000/api/addHighScore", true);
+	xhttp.open("POST", "http:sbodiwala:3000/api/addHighScore", true);
 	xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 	xhttp.send(JSON.stringify({user: name, score: score}));
 	getHighestScore();
 }
 
-*/

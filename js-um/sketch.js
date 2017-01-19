@@ -1,7 +1,6 @@
 var snake;
 var scl = 40;
 var food;
-var joystick;
 var name;
 var level = 10;
 var count = 5;
@@ -194,4 +193,3 @@ function setNewHighScore(score) {
 	xhttp.send(JSON.stringify({user: name, score: score}));
 	getHighestScore();
 }
-
